@@ -1,6 +1,6 @@
-var geoscore = {}
-geoscore.maps = require('./maps.js');
-geoscore.geography = require('./geography.js');
-geoscore.classifications = require('./classification.js');
-geoscore.colors = require('./colors.js');
-window.geoscore = geoscore;
+var jsRender = {}
+jsRender.maps = require('./maps.js');
+jsRender.geography = require('./geography.js');
+jsRender.classifications = require('./classification.js');
+jsRender.colors = require('./colors.js');
+window.jsRender = jsRender;
