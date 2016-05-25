@@ -1,0 +1,10 @@
+{
+    "name": "jsRender",
+    "version": "0.0.1",
+    "author": "Charles R Schmidt",
+    "description": "render gsTiles via javascript",
+    "dependencies": {
+        "underscore": "latest",
+        "jquery": "latest"
+    }
+}
