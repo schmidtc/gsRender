@@ -14,14 +14,14 @@
         },
         map = new google.maps.Map(document.getElementById("map"), mapOptions),
     // Step 2
-        //myGeography = geoscore.geography.COUNTIES,
-        myGeography = geoscore.geography.NYC_DTM_LOTS,
+        //myGeography = jsRender.geography.COUNTIES,
+        myGeography = jsRender.geography.NYC_DTM_LOTS,
         overlayOptions = {
             geography: myGeography,
             opacity: 0.75,
             borders: false
         },
-        overlay = geoscore.maps.Overlay(overlayOptions);
+        overlay = jsRender.maps.Overlay(overlayOptions);
     // Step 3
     map.overlayMapTypes.push(overlay);
 
@@ -32,17 +32,17 @@
     for (i = 0; i < n; i++) class_list[i] = i % 9;
 
     // Step 4
-    overlay.setClassification(geoscore.classifications.fromClassList(class_list));
-    overlay.setColors(geoscore.colors.colorBrewer("RdYlBu", 9));
+    overlay.setClassification(jsRender.classifications.fromClassList(class_list));
+    overlay.setColors(jsRender.colors.colorBrewer("RdYlBu", 9));
 
-    //geoscore.api.variable({
-    //    geography: geoscore.geography.US_CENSUS_BLOCKGROUPS,
+    //jsRender.api.variable({
+    //    geography: jsRender.geography.US_CENSUS_BLOCKGROUPS,
     //    variable: "B19013" // Median Household Income
     //}).then(function(data){
     //    overlay.setData('income', data); // optional, provides easy access to the raw data, used in step 5.
-    //    var cl = geoscore.util.equal_interval(data, 5);
+    //    var cl = jsRender.util.equal_interval(data, 5);
     //    overlay.setClassification(cl);
-    //    overlay.setColors(geoscore.colors.RedBlue(5));
+    //    overlay.setColors(jsRender.colors.RedBlue(5));
     //});
 
     //Step 5
@@ -63,7 +63,7 @@
         for (var i=0; i < n; i++) {
             overlay._render();
         }
-        //overlay.setColors(geoscore.colors.colorBrewer("PuBu", 9));
+        //overlay.setColors(jsRender.colors.colorBrewer("PuBu", 9));
         //console.info("render:", (new Date) - t0);
         //console.profileEnd();
         var t1 = (new Date);

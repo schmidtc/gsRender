@@ -14,10 +14,10 @@ var mapOptions = {
 ##### Step 2: Create a geoScore map overlay
 ```javascript
 var overlayOptions = {
-        geography: geoscore.geography.US_CENSUS_STATES_2013,
+        geography: jsRender.geography.US_CENSUS_STATES_2013,
         opacity: 0.75
     },
-    overlay = geoscore.maps.Overlay(overlayOptions);
+    overlay = jsRender.maps.Overlay(overlayOptions);
 ```            
 
 ##### Step 3: Add the overlay to the google map
@@ -27,14 +27,14 @@ var overlayOptions = {
 
 ##### Step 4: Customize the overlay
 ```javascript
-    geoscore.api.variable({
-        geography: geoscore.geography.US_CENSUS_STATES_2013,
+    jsRender.api.variable({
+        geography: jsRender.geography.US_CENSUS_STATES_2013,
         variable: "B19013" // Median Household Income
     }).then(function(data){
         overlay.setData('income', data); // optional, provides easy access to the raw data, used in step 5.
-        var cl = geoscore.util.equal_interval(data, 5);
+        var cl = jsRender.util.equal_interval(data, 5);
         overlay.setClassification(cl);
-        overlay.setColors(geoscore.colors.RedBlue(5));
+        overlay.setColors(jsRender.colors.RedBlue(5));
     });
 ```
 
@@ -63,7 +63,7 @@ var overlayOptions = {
 <body>
 <div style="width:100%; height:500px;" id=map></div>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="http://cdn.geoscore.com/js/geoscore.v1.js?apikey=API_KEY"></script>
+<script type="text/javascript" src="http://cdn.geoscore.com/js/jsRender.v1.js?apikey=API_KEY"></script>
 <script>
     // Step 1
     var mapOptions = {
@@ -74,22 +74,22 @@ var overlayOptions = {
         map = new google.maps.Map(document.getElementById("map"), mapOptions),
     // Step 2
         overlayOptions = {
-            geography: geoscore.geography.US_CENSUS_STATES_2013,
+            geography: jsRender.geography.US_CENSUS_STATES_2013,
             opacity: 0.75
         },
-        overlay = geoscore.maps.Overlay(overlayOptions);
+        overlay = jsRender.maps.Overlay(overlayOptions);
     // Step 3
     map.overlayMapTypes.push(overlay);
 
     // Step 4
-    geoscore.api.variable({
-        geography: geoscore.geography.US_CENSUS_STATES_2013,
+    jsRender.api.variable({
+        geography: jsRender.geography.US_CENSUS_STATES_2013,
         variable: "B19013" // Median Household Income
     }).then(function(data){
         overlay.setData('income', data); // optional, provides easy access to the raw data, used in step 5.
-        var cl = geoscore.util.equal_interval(data, 5);
+        var cl = jsRender.util.equal_interval(data, 5);
         overlay.setClassification(cl);
-        overlay.setColors(geoscore.colors.RedBlue(5));
+        overlay.setColors(jsRender.colors.RedBlue(5));
     });
 
     // Step 5
@@ -116,7 +116,7 @@ var overlayOptions = {
 The API KEY must be included in the request for the GeoScore JavaScript Source Code.
 The Javascript library will extract the key from the URL and automatically request a token from our API server.
 ```javascript
-geoscore.api._getToken(api_key);
+jsRender.api._getToken(api_key);
 ```
 the api_key and "referrer" header will be checked and if valid a token will be returned.
 the token will be used to sign all requests to CloudFront, thus protecting our Tiles from unauthorized access.
@@ -125,23 +125,23 @@ the token will also be used to aign requests to our API.
 #### JavaScript Reference
 
 
-##### geoscore Namespaces
+##### jsRender Namespaces
 
-geoscore.maps -- Namespace: map rendering tools and overlays
-geoscore.api -- Namespace: API access to our Data, tools, etc.
-geoscore.geography -- Namespace: information about available geographies.
+jsRender.maps -- Namespace: map rendering tools and overlays
+jsRender.api -- Namespace: API access to our Data, tools, etc.
+jsRender.geography -- Namespace: information about available geographies.
 
-##### geoscore.maps
+##### jsRender.maps
 
-###### geoscore.maps.Overlay -- returns a geoscore overlay.
-  arguments: OverlayOptions -- REQUIRED -- see geoscore.maps.OverlayOptions
+###### jsRender.maps.Overlay -- returns a jsRender overlay.
+  arguments: OverlayOptions -- REQUIRED -- see jsRender.maps.OverlayOptions
   
   methods: coming soon
   
-###### geoscore.maps.OverlayOptions -- object
-  geography -- REQUIRED -- geography id, see geoscore.geography
-  classification -- Optional -- geoscore.maps.Classification (default: all 1 class)
-  colorScheme -- Optional -- geoscore.maps.ColorScheme (default: random color)
+###### jsRender.maps.OverlayOptions -- object
+  geography -- REQUIRED -- geography id, see jsRender.geography
+  classification -- Optional -- jsRender.maps.Classification (default: all 1 class)
+  colorScheme -- Optional -- jsRender.maps.ColorScheme (default: random color)
   opacity -- Optional -- number between 0 and 1 (default: 1)
   
   
