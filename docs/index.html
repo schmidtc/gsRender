@@ -1,0 +1,76 @@
+<html>
+<body>
+<div style="width:100%; height:500px;" id=map></div>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="../geoscore.v1.js"></script>
+<script>
+    // Step 1
+    var mapOptions = {
+            //zoom: 12,
+            zoom: 12,
+            //center: new google.maps.LatLng(37.8, -122.3),
+            center: new google.maps.LatLng(40.7, -73.9),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        },
+        map = new google.maps.Map(document.getElementById("map"), mapOptions),
+    // Step 2
+        //myGeography = geoscore.geography.COUNTIES,
+        myGeography = geoscore.geography.NYC_DTM_LOTS,
+        overlayOptions = {
+            geography: myGeography,
+            opacity: 0.75,
+            borders: false
+        },
+        overlay = geoscore.maps.Overlay(overlayOptions);
+    // Step 3
+    map.overlayMapTypes.push(overlay);
+
+    // Create a fake classification...
+    var n = myGeography.numregions,
+        class_list = [],
+        i;
+    for (i = 0; i < n; i++) class_list[i] = i % 9;
+
+    // Step 4
+    overlay.setClassification(geoscore.classifications.fromClassList(class_list));
+    overlay.setColors(geoscore.colors.colorBrewer("RdYlBu", 9));
+
+    //geoscore.api.variable({
+    //    geography: geoscore.geography.US_CENSUS_BLOCKGROUPS,
+    //    variable: "B19013" // Median Household Income
+    //}).then(function(data){
+    //    overlay.setData('income', data); // optional, provides easy access to the raw data, used in step 5.
+    //    var cl = geoscore.util.equal_interval(data, 5);
+    //    overlay.setClassification(cl);
+    //    overlay.setColors(geoscore.colors.RedBlue(5));
+    //});
+
+    //Step 5
+    //var info = new google.maps.InfoWindow();
+    overlay.addListener(map, 'mouseover', function(event) {
+        var rid = event.region_offset - 2,
+            clid = class_list[rid];
+        //if (rid >= 0) console.info("Class:", clid, "Region:", rid);
+        //else console.info("Clear");
+        overlay.opts.cl.set_selection(rid+2);
+        overlay.render();
+    });
+
+    function test(){
+        var t0 = (new Date),
+            n = 100;
+        //console.profile();
+        for (var i=0; i < n; i++) {
+            overlay._render();
+        }
+        //overlay.setColors(geoscore.colors.colorBrewer("PuBu", 9));
+        //console.info("render:", (new Date) - t0);
+        //console.profileEnd();
+        var t1 = (new Date);
+        console.info("Rendering fps: ", n / ((t1-t0)/1000), "Rendered: ", n, " frames in ", t1-t0, " seconds");
+        alert("Rendering fps: "+ (n / ((t1-t0)/1000)) + "\nRendered: " + n + " frames in " + (t1-t0) + " seconds");
+    }
+    //setTimeout(test, 3000);
+</script>
+</body>
+</html>

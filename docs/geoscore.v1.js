@@ -1,0 +1,1 @@
+../geoscore.v1.js

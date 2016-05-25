@@ -38,10 +38,8 @@ var MapLayer = function(opts){
     self.tiles = tiles;
     self.opts = opts;
     self.version = self.opts.geography.version;
-    if (self.version == 2) {
-        self.tsid = self.opts.geography.tsid;
-    } else {
-        self.tsid = self.opts.geography.owner +":"+ self.opts.geography.shpfile;
+    if (self.version < 3) {
+        throw "Unsupported Version";
     }
     // require by google.maps.MapType specification
     // https://developers.google.com/maps/documentation/javascript/reference?csw=1#MapType
@@ -156,15 +154,10 @@ var MapLayer = function(opts){
     self._getTileURL = function(x, y, z, b){
         // Hashes the tile to one of four tile servers.
         // TODO: This should be researched, 2 servers is probably better and faster.
-        if (this.version == 2) {
-            return config.v2_tile_domains[y%2] + '/maps/' + [this.tsid,x,y,z].join('/') + "?b=" + (b+0);
+        if (this.version >= 3) {
+            return this.opts.geography.url+[x,y,z,b+0].join('/');
         } else {
-            return config.v1_tile_domains[((x % 2) << 1) | (y % 2)] + 
-                "/dyntm/j/?ts=" + this.tsid +
-                "&z=" + z +
-                "&x=" + x +
-                "&y=" + y +
-                "&b=" + (b+0);
+            throw "Unsupported Version";
         }
     };
     self.getTile = function(coord, zoom, ownerDocument){
