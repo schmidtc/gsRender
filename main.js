@@ -1,6 +1,6 @@
-var jsRender = {}
-jsRender.maps = require('./maps.js');
-jsRender.geography = require('./geography.js');
-jsRender.classifications = require('./classification.js');
-jsRender.colors = require('./colors.js');
-window.jsRender = jsRender;
+var gsRender = {}
+gsRender.maps = require('./maps.js');
+gsRender.geography = require('./geography.js');
+gsRender.classifications = require('./classification.js');
+gsRender.colors = require('./colors.js');
+window.gsRender = gsRender;

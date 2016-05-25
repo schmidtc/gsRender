@@ -2,7 +2,7 @@
 <body>
 <div style="width:100%; height:500px;" id=map></div>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="../jsRender.v1.js"></script>
+<script type="text/javascript" src="./gsRender.v1.js"></script>
 <script>
     // Step 1
     var mapOptions = {
@@ -14,14 +14,14 @@
         },
         map = new google.maps.Map(document.getElementById("map"), mapOptions),
     // Step 2
-        //myGeography = jsRender.geography.COUNTIES,
-        myGeography = jsRender.geography.NYC_DTM_LOTS,
+        //myGeography = gsRender.geography.COUNTIES,
+        myGeography = gsRender.geography.NYC_DTM_LOTS,
         overlayOptions = {
             geography: myGeography,
             opacity: 0.75,
             borders: false
         },
-        overlay = jsRender.maps.Overlay(overlayOptions);
+        overlay = gsRender.maps.Overlay(overlayOptions);
     // Step 3
     map.overlayMapTypes.push(overlay);
 
@@ -32,17 +32,17 @@
     for (i = 0; i < n; i++) class_list[i] = i % 9;
 
     // Step 4
-    overlay.setClassification(jsRender.classifications.fromClassList(class_list));
-    overlay.setColors(jsRender.colors.colorBrewer("RdYlBu", 9));
+    overlay.setClassification(gsRender.classifications.fromClassList(class_list));
+    overlay.setColors(gsRender.colors.colorBrewer("RdYlBu", 9));
 
-    //jsRender.api.variable({
-    //    geography: jsRender.geography.US_CENSUS_BLOCKGROUPS,
+    //gsRender.api.variable({
+    //    geography: gsRender.geography.US_CENSUS_BLOCKGROUPS,
     //    variable: "B19013" // Median Household Income
     //}).then(function(data){
     //    overlay.setData('income', data); // optional, provides easy access to the raw data, used in step 5.
-    //    var cl = jsRender.util.equal_interval(data, 5);
+    //    var cl = gsRender.util.equal_interval(data, 5);
     //    overlay.setClassification(cl);
-    //    overlay.setColors(jsRender.colors.RedBlue(5));
+    //    overlay.setColors(gsRender.colors.RedBlue(5));
     //});
 
     //Step 5
@@ -63,7 +63,7 @@
         for (var i=0; i < n; i++) {
             overlay._render();
         }
-        //overlay.setColors(jsRender.colors.colorBrewer("PuBu", 9));
+        //overlay.setColors(gsRender.colors.colorBrewer("PuBu", 9));
         //console.info("render:", (new Date) - t0);
         //console.profileEnd();
         var t1 = (new Date);
