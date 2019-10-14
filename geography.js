@@ -11,13 +11,17 @@ populated from: http://tiles.gwikis.com/dyntm.json/tileset/dtmUser:0587B82127C1A
 
 module.exports = {
     NYC_DTM_BLOCKS: {
-        url: 'http://tiles.realdirect.com:7500/maps/dtm0316_tax_block/',
+        url: '//www.realdirect.com/tiles/maps/dtm0316_tax_block/',
+        // Above is a proxy to:
+        //url: 'http://tiles.realdirect.com:7500/maps/dtm0316_tax_block/',
         tsid: 'nyc_dtm_blocks',
         numregions: 33314,
         version: 3
     },
     NYC_DTM_LOTS: {
-        url: 'http://tiles.realdirect.com:7500/maps/dtm0316_tax_lot/',
+        url: '//www.realdirect.com/tiles/maps/dtm0316_tax_lot/',
+        // Above is a proxy to:
+        //url: 'http://tiles.realdirect.com:7500/maps/dtm0316_tax_lot/',
         tsid: 'nyc_dtm_lots',
         numregions: 858760,
         version: 3
